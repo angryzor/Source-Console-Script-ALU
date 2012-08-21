@@ -1,0 +1,307 @@
+// The following is a NAND gate
+//-------------------------------
+
+// NOT
+alias "not_1_in__0" "alias not_1_output not_1_out__1"
+alias "not_1_in__1" "alias not_1_output not_1_out__0"
+
+alias "not_1_output" ""
+
+alias "not_1_out__0" "echo 0"
+alias "not_1_out__1" "echo 1"
+
+alias "not_1_tick" "not_1_output"
+
+
+// AND
+alias "and_1_in_1__0" "alias and_1_output and_1_out__0"
+alias "and_1_in_1__1" "alias and_1_output and_1_stage1"
+
+alias "and_1_stage1" "and_1_out__0"
+
+alias "and_1_in_2__0" "alias and_1_stage1 and_1_out__0"
+alias "and_1_in_2__1" "alias and_1_stage1 and_1_out__1"
+
+alias "and_1_output" ""
+
+alias "and_1_out__0" "not_1_in__0; echo and out 0"
+alias "and_1_out__1" "not_1_in__1; echo and out 1"
+
+alias "and_1_tick" "and_1_output; not_1_tick"
+
+
+// The following is an OR gate
+//------------------------------
+// OR
+alias "or_1_in_1__0" "alias or_1_output or_1_stage1"
+alias "or_1_in_1__1" "alias or_1_output or_1_out__1"
+
+alias "or_1_stage1" "or_1_out__0"
+
+alias "or_1_in_2__0" "alias or_1_stage1 or_1_out__0"
+alias "or_1_in_2__1" "alias or_1_stage1 or_1_out__1"
+
+alias "or_1_output" ""
+
+alias "or_1_out__0" "echo 0"
+alias "or_1_out__1" "echo 1"
+
+alias "or_1_tick" "or_1_output"
+
+
+// The following is a XOR gate
+//------------------------------
+alias "xor_1_in_1__0" "alias xor_1_output xor_1_stage1"
+alias "xor_1_in_1__1" "alias xor_1_output xor_1_stage2"
+
+alias "xor_1_stage1" "xor_1_out__0"
+
+alias "xor_1_in_2__0" "alias xor_1_stage1 xor_1_out__0; alias xor_1_stage2 xor_1_out__1"
+alias "xor_1_in_2__1" "alias xor_1_stage1 xor_1_out__1; alias xor_1_stage2 xor_1_out__0"
+
+alias "xor_1_output" ""
+
+alias "xor_1_out__0" "echo 0"
+alias "xor_1_out__1" "echo 1"
+
+alias "xor_1_tick" "xor_1_output"
+
+
+
+
+// The full adder for bit 0
+//============================
+// inputs
+//--------
+alias "fulladd_1_A__0" "fulladd_1_xor_1_in_1__0; fulladd_1_and_2_in_1__0"
+alias "fulladd_1_A__1" "fulladd_1_xor_1_in_1__1; fulladd_1_and_2_in_1__1"
+
+alias "fulladd_1_B__0" "fulladd_1_xor_1_in_2__0; fulladd_1_and_2_in_2__0"
+alias "fulladd_1_B__1" "fulladd_1_xor_1_in_2__1; fulladd_1_and_2_in_2__1"
+
+alias "fulladd_1_Cin__0" "fulladd_1_xor_2_in_2__0; fulladd_1_and_1_in_2__0"
+alias "fulladd_1_Cin__1" "fulladd_1_xor_2_in_2__1; fulladd_1_and_1_in_2__1"
+
+// xor 1
+//-------
+alias "fulladd_1_xor_1_in_1__0" "alias fulladd_1_xor_1_output fulladd_1_xor_1_stage1"
+alias "fulladd_1_xor_1_in_1__1" "alias fulladd_1_xor_1_output fulladd_1_xor_1_stage2"
+
+alias "fulladd_1_xor_1_stage1" "fulladd_1_xor_1_out__0"
+
+alias "fulladd_1_xor_1_in_2__0" "alias fulladd_1_xor_1_stage1 fulladd_1_xor_1_out__0; alias fulladd_1_xor_1_stage2 fulladd_1_xor_1_out__1"
+alias "fulladd_1_xor_1_in_2__1" "alias fulladd_1_xor_1_stage1 fulladd_1_xor_1_out__1; alias fulladd_1_xor_1_stage2 fulladd_1_xor_1_out__0"
+
+alias "fulladd_1_xor_1_output" ""
+
+alias "fulladd_1_xor_1_out__0" "fulladd_1_xor_2_in_1__0; fulladd_1_and_1_in_1__0"
+alias "fulladd_1_xor_1_out__1" "fulladd_1_xor_2_in_1__1; fulladd_1_and_1_in_1__1"
+
+alias "fulladd_1_xor_1_tick" "fulladd_1_xor_1_output"
+alias "fulladd_1_xor_1_tickrecurse" ""
+alias "fulladd_1_xor_1_rcl" "alias fulladd_1_xor_1_execute ; fulladd_1_xor_1_tickrecurse; fulladd_1_xor_1_tick; alias fulladd_1_xor_1_execute fulladd_1_xor_1_rcl"
+alias "fulladd_1_xor_1_execute" "fulladd_1_xor_1_rcl"
+
+// xor 2
+//-------
+alias "fulladd_1_xor_2_in_1__0" "alias fulladd_1_xor_2_output fulladd_1_xor_2_stage1"
+alias "fulladd_1_xor_2_in_1__1" "alias fulladd_1_xor_2_output fulladd_1_xor_2_stage2"
+
+alias "fulladd_1_xor_2_stage1" "fulladd_1_xor_2_out__0"
+
+alias "fulladd_1_xor_2_in_2__0" "alias fulladd_1_xor_2_stage1 fulladd_1_xor_2_out__0; alias fulladd_1_xor_2_stage2 fulladd_1_xor_2_out__1"
+alias "fulladd_1_xor_2_in_2__1" "alias fulladd_1_xor_2_stage1 fulladd_1_xor_2_out__1; alias fulladd_1_xor_2_stage2 fulladd_1_xor_2_out__0"
+
+alias "fulladd_1_xor_2_output" ""
+
+alias "fulladd_1_xor_2_out__0" "echo S[0] = 0"
+alias "fulladd_1_xor_2_out__1" "echo S[0] = 1"
+
+alias "fulladd_1_xor_2_tick" "fulladd_1_xor_2_output"
+alias "fulladd_1_xor_2_tickrecurse" "fulladd_1_xor_1_execute"
+alias "fulladd_1_xor_2_rcl" "alias fulladd_1_xor_2_execute ; fulladd_1_xor_2_tickrecurse; fulladd_1_xor_2_tick; alias fulladd_1_xor_2_execute fulladd_1_xor_2_rcl"
+alias "fulladd_1_xor_2_execute" "fulladd_1_xor_2_rcl"
+
+// and 1
+//-------
+alias "fulladd_1_and_1_in_1__0" "alias fulladd_1_and_1_output fulladd_1_and_1_out__0"
+alias "fulladd_1_and_1_in_1__1" "alias fulladd_1_and_1_output fulladd_1_and_1_stage1"
+
+alias "fulladd_1_and_1_stage1" "fulladd_1_and_1_out__0"
+
+alias "fulladd_1_and_1_in_2__0" "alias fulladd_1_and_1_stage1 fulladd_1_and_1_out__0"
+alias "fulladd_1_and_1_in_2__1" "alias fulladd_1_and_1_stage1 fulladd_1_and_1_out__1"
+
+alias "fulladd_1_and_1_output" ""
+
+alias "fulladd_1_and_1_out__0" "fulladd_1_or_in_1__0"
+alias "fulladd_1_and_1_out__1" "fulladd_1_or_in_1__1"
+
+alias "fulladd_1_and_1_tick" "fulladd_1_and_1_output"
+alias "fulladd_1_and_1_tickrecurse" "fulladd_1_xor_1_execute"
+alias "fulladd_1_and_1_rcl" "alias fulladd_1_and_1_execute ; fulladd_1_and_1_tickrecurse; fulladd_1_and_1_tick; alias fulladd_1_and_1_execute fulladd_1_and_1_rcl"
+alias "fulladd_1_and_1_execute" "fulladd_1_and_1_rcl"
+
+// and 2
+//-------
+alias "fulladd_1_and_2_in_1__0" "alias fulladd_1_and_2_output fulladd_1_and_2_out__0"
+alias "fulladd_1_and_2_in_1__1" "alias fulladd_1_and_2_output fulladd_1_and_2_stage1"
+
+alias "fulladd_1_and_2_stage1" "fulladd_1_and_2_out__0"
+
+alias "fulladd_1_and_2_in_2__0" "alias fulladd_1_and_2_stage1 fulladd_1_and_2_out__0"
+alias "fulladd_1_and_2_in_2__1" "alias fulladd_1_and_2_stage1 fulladd_1_and_2_out__1"
+
+alias "fulladd_1_and_2_output" ""
+
+alias "fulladd_1_and_2_out__0" "fulladd_1_or_in_2__0"
+alias "fulladd_1_and_2_out__1" "fulladd_1_or_in_2__1"
+
+alias "fulladd_1_and_2_tick" "fulladd_1_and_2_output"
+alias "fulladd_1_and_2_tickrecurse" ""
+alias "fulladd_1_and_2_rcl" "alias fulladd_1_and_2_execute ; fulladd_1_and_2_tickrecurse; fulladd_1_and_2_tick; alias fulladd_1_and_2_execute fulladd_1_and_2_rcl"
+alias "fulladd_1_and_2_execute" "fulladd_1_and_2_rcl"
+
+// or
+//----
+alias "fulladd_1_or_in_1__0" "alias fulladd_1_or_output fulladd_1_or_stage1"
+alias "fulladd_1_or_in_1__1" "alias fulladd_1_or_output fulladd_1_or_out__1"
+
+alias "fulladd_1_or_stage1" "fulladd_1_or_out__0"
+
+alias "fulladd_1_or_in_2__0" "alias fulladd_1_or_stage1 fulladd_1_or_out__0"
+alias "fulladd_1_or_in_2__1" "alias fulladd_1_or_stage1 fulladd_1_or_out__1"
+
+alias "fulladd_1_or_output" ""
+
+alias "fulladd_1_or_out__0" "fulladd_2_Cin__0; echo Propagating bit 0 carry 0"
+alias "fulladd_1_or_out__1" "fulladd_2_Cin__1; echo Propagating bit 0 carry 1"
+
+alias "fulladd_1_or_tick" "fulladd_1_or_output"
+alias "fulladd_1_or_tickrecurse" "fulladd_1_and_1_execute; fulladd_1_and_2_execute"
+alias "fulladd_1_or_rcl" "alias fulladd_1_or_execute ; fulladd_1_or_tickrecurse; fulladd_1_or_tick; alias fulladd_1_or_execute fulladd_1_or_rcl"
+alias "fulladd_1_or_execute" "fulladd_1_or_rcl"
+
+
+// The full adder for bit 1
+//============================
+// inputs
+//--------
+alias "fulladd_2_A__0" "fulladd_2_xor_1_in_1__0; fulladd_2_and_2_in_1__0"
+alias "fulladd_2_A__1" "fulladd_2_xor_1_in_1__1; fulladd_2_and_2_in_1__1"
+
+alias "fulladd_2_B__0" "fulladd_2_xor_1_in_2__0; fulladd_2_and_2_in_2__0"
+alias "fulladd_2_B__1" "fulladd_2_xor_1_in_2__1; fulladd_2_and_2_in_2__1"
+
+alias "fulladd_2_Cin__0" "fulladd_2_xor_2_in_2__0; fulladd_2_and_1_in_2__0"
+alias "fulladd_2_Cin__1" "fulladd_2_xor_2_in_2__1; fulladd_2_and_1_in_2__1"
+
+// xor 1
+//-------
+alias "fulladd_2_xor_1_in_1__0" "alias fulladd_2_xor_1_output fulladd_2_xor_1_stage1"
+alias "fulladd_2_xor_1_in_1__1" "alias fulladd_2_xor_1_output fulladd_2_xor_1_stage2"
+
+alias "fulladd_2_xor_1_stage1" "fulladd_2_xor_1_out__0"
+
+alias "fulladd_2_xor_1_in_2__0" "alias fulladd_2_xor_1_stage1 fulladd_2_xor_1_out__0; alias fulladd_2_xor_1_stage2 fulladd_2_xor_1_out__1"
+alias "fulladd_2_xor_1_in_2__1" "alias fulladd_2_xor_1_stage1 fulladd_2_xor_1_out__1; alias fulladd_2_xor_1_stage2 fulladd_2_xor_1_out__0"
+
+alias "fulladd_2_xor_1_output" ""
+
+alias "fulladd_2_xor_1_out__0" "fulladd_2_xor_2_in_1__0; fulladd_2_and_1_in_1__0"
+alias "fulladd_2_xor_1_out__1" "fulladd_2_xor_2_in_1__1; fulladd_2_and_1_in_1__1"
+
+alias "fulladd_2_xor_1_tick" "fulladd_2_xor_1_output"
+alias "fulladd_2_xor_1_tickrecurse" ""
+alias "fulladd_2_xor_1_rcl" "alias fulladd_2_xor_1_execute ; fulladd_2_xor_1_tickrecurse; fulladd_2_xor_1_tick; alias fulladd_2_xor_1_execute fulladd_2_xor_1_rcl"
+alias "fulladd_2_xor_1_execute" "fulladd_2_xor_1_rcl"
+
+// xor 2
+//-------
+alias "fulladd_2_xor_2_in_1__0" "alias fulladd_2_xor_2_output fulladd_2_xor_2_stage1"
+alias "fulladd_2_xor_2_in_1__1" "alias fulladd_2_xor_2_output fulladd_2_xor_2_stage2"
+
+alias "fulladd_2_xor_2_stage1" "fulladd_2_xor_2_out__0"
+
+alias "fulladd_2_xor_2_in_2__0" "alias fulladd_2_xor_2_stage1 fulladd_2_xor_2_out__0; alias fulladd_2_xor_2_stage2 fulladd_2_xor_2_out__1"
+alias "fulladd_2_xor_2_in_2__1" "alias fulladd_2_xor_2_stage1 fulladd_2_xor_2_out__1; alias fulladd_2_xor_2_stage2 fulladd_2_xor_2_out__0"
+
+alias "fulladd_2_xor_2_output" ""
+
+alias "fulladd_2_xor_2_out__0" "echo S[1] = 0"
+alias "fulladd_2_xor_2_out__1" "echo S[1] = 1"
+
+alias "fulladd_2_xor_2_tick" "fulladd_2_xor_2_output"
+alias "fulladd_2_xor_2_tickrecurse" "fulladd_2_xor_1_execute; fulladd_1_or_execute"
+alias "fulladd_2_xor_2_rcl" "alias fulladd_2_xor_2_execute ; fulladd_2_xor_2_tickrecurse; fulladd_2_xor_2_tick; alias fulladd_2_xor_2_execute fulladd_2_xor_2_rcl"
+alias "fulladd_2_xor_2_execute" "fulladd_2_xor_2_rcl"
+
+// and 1
+//-------
+alias "fulladd_2_and_1_in_1__0" "alias fulladd_2_and_1_output fulladd_2_and_1_out__0"
+alias "fulladd_2_and_1_in_1__1" "alias fulladd_2_and_1_output fulladd_2_and_1_stage1"
+
+alias "fulladd_2_and_1_stage1" "fulladd_2_and_1_out__0"
+
+alias "fulladd_2_and_1_in_2__0" "alias fulladd_2_and_1_stage1 fulladd_2_and_1_out__0"
+alias "fulladd_2_and_1_in_2__1" "alias fulladd_2_and_1_stage1 fulladd_2_and_1_out__1"
+
+alias "fulladd_2_and_1_output" ""
+
+alias "fulladd_2_and_1_out__0" "fulladd_2_or_in_1__0"
+alias "fulladd_2_and_1_out__1" "fulladd_2_or_in_1__1"
+
+alias "fulladd_2_and_1_tick" "fulladd_2_and_1_output"
+alias "fulladd_2_and_1_tickrecurse" "fulladd_2_xor_1_execute"
+alias "fulladd_2_and_1_rcl" "alias fulladd_2_and_1_execute ; fulladd_2_and_1_tickrecurse; fulladd_2_and_1_tick; alias fulladd_2_and_1_execute fulladd_2_and_1_rcl"
+alias "fulladd_2_and_1_execute" "fulladd_2_and_1_rcl"
+
+// and 2
+//-------
+alias "fulladd_2_and_2_in_1__0" "alias fulladd_2_and_2_output fulladd_2_and_2_out__0"
+alias "fulladd_2_and_2_in_1__1" "alias fulladd_2_and_2_output fulladd_2_and_2_stage1"
+
+alias "fulladd_2_and_2_stage1" "fulladd_2_and_2_out__0"
+
+alias "fulladd_2_and_2_in_2__0" "alias fulladd_2_and_2_stage1 fulladd_2_and_2_out__0"
+alias "fulladd_2_and_2_in_2__1" "alias fulladd_2_and_2_stage1 fulladd_2_and_2_out__1"
+
+alias "fulladd_2_and_2_output" ""
+
+alias "fulladd_2_and_2_out__0" "fulladd_2_or_in_2__0"
+alias "fulladd_2_and_2_out__1" "fulladd_2_or_in_2__1"
+
+alias "fulladd_2_and_2_tick" "fulladd_2_and_2_output"
+alias "fulladd_2_and_2_tickrecurse" ""
+alias "fulladd_2_and_2_rcl" "alias fulladd_2_and_2_execute ; fulladd_2_and_2_tickrecurse; fulladd_2_and_2_tick; alias fulladd_2_and_2_execute fulladd_2_and_2_rcl"
+alias "fulladd_2_and_2_execute" "fulladd_2_and_2_rcl"
+
+// or
+//----
+alias "fulladd_2_or_in_1__0" "alias fulladd_2_or_output fulladd_2_or_stage1"
+alias "fulladd_2_or_in_1__1" "alias fulladd_2_or_output fulladd_2_or_out__1"
+
+alias "fulladd_2_or_stage1" "fulladd_2_or_out__0"
+
+alias "fulladd_2_or_in_2__0" "alias fulladd_2_or_stage1 fulladd_2_or_out__0"
+alias "fulladd_2_or_in_2__1" "alias fulladd_2_or_stage1 fulladd_2_or_out__1"
+
+alias "fulladd_2_or_output" ""
+
+alias "fulladd_2_or_out__0" "echo Carry = 0"
+alias "fulladd_2_or_out__1" "echo Carry = 1"
+
+alias "fulladd_2_or_tick" "fulladd_2_or_output"
+alias "fulladd_2_or_tickrecurse" "fulladd_2_and_1_execute; fulladd_2_and_2_execute"
+alias "fulladd_2_or_rcl" "alias fulladd_2_or_execute ; fulladd_2_or_tickrecurse; fulladd_2_or_tick; alias fulladd_2_or_execute fulladd_2_or_rcl"
+alias "fulladd_2_or_execute" "fulladd_2_or_rcl"
+
+
+fulladd_1_Cin__0
+fulladd_1_A__1 
+fulladd_2_A__0 
+fulladd_1_B__1
+fulladd_2_B__0
+fulladd_1_xor_2_execute
+fulladd_2_xor_2_execute
+fulladd_2_or_execute

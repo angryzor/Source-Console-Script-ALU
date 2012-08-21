@@ -1,0 +1,1051 @@
+//*************************************************************************************
+// Full Adder for bit 0 (8 total)
+//*************************************************************************************
+
+
+alias "fa0_A__0" "fa0_xor0_in_0__0; fa0_and1_in_0__0"
+alias "fa0_A__1" "fa0_xor0_in_0__1; fa0_and1_in_0__1"
+alias "fa0_B__0" "fa0_xor0_in_1__0; fa0_and1_in_1__0"
+alias "fa0_B__1" "fa0_xor0_in_1__1; fa0_and1_in_1__1"
+alias "fa0_Cin__0" "fa0_xor1_in_1__0; fa0_and0_in_1__0"
+alias "fa0_Cin__1" "fa0_xor1_in_1__1; fa0_and0_in_1__1"
+//============================================================
+// XOR gate "fa0_xor0"
+//============================================================
+
+alias "fa0_xor0_in_0__0" "alias fa0_xor0_output fa0_xor0_stage1"
+alias "fa0_xor0_in_0__1" "alias fa0_xor0_output fa0_xor0_stage2"
+
+alias "fa0_xor0_stage1" "fa0_xor0_out__0"
+
+alias "fa0_xor0_stage2" "fa0_xor0_out__1"
+
+alias "fa0_xor0_in_1__0" "alias fa0_xor0_stage1 fa0_xor0_out__0; alias fa0_xor0_stage2 fa0_xor0_out__1"
+alias "fa0_xor0_in_1__1" "alias fa0_xor0_stage1 fa0_xor0_out__1; alias fa0_xor0_stage2 fa0_xor0_out__0"
+
+alias "fa0_xor0_output" ""
+
+alias "fa0_xor0_out__0" "fa0_xor1_in_0__0; fa0_and0_in_0__0"
+alias "fa0_xor0_out__1" "fa0_xor1_in_0__1; fa0_and0_in_0__1"
+
+alias "fa0_xor0_tick" "fa0_xor0_output"
+alias "fa0_xor0_tickrecurse" ""
+alias "fa0_xor0_rcl" "alias fa0_xor0_execute ; fa0_xor0_tickrecurse; fa0_xor0_tick; alias fa0_xor0_execute fa0_xor0_rcl"
+alias "fa0_xor0_execute" "fa0_xor0_rcl"
+
+
+//============================================================
+// XOR gate "fa0_xor1"
+//============================================================
+
+alias "fa0_xor1_in_0__0" "alias fa0_xor1_output fa0_xor1_stage1"
+alias "fa0_xor1_in_0__1" "alias fa0_xor1_output fa0_xor1_stage2"
+
+alias "fa0_xor1_stage1" "fa0_xor1_out__0"
+
+alias "fa0_xor1_stage2" "fa0_xor1_out__1"
+
+alias "fa0_xor1_in_1__0" "alias fa0_xor1_stage1 fa0_xor1_out__0; alias fa0_xor1_stage2 fa0_xor1_out__1"
+alias "fa0_xor1_in_1__1" "alias fa0_xor1_stage1 fa0_xor1_out__1; alias fa0_xor1_stage2 fa0_xor1_out__0"
+
+alias "fa0_xor1_output" ""
+
+alias "fa0_xor1_out__0" "echo S[0] = 0"
+alias "fa0_xor1_out__1" "echo S[0] = 1"
+
+alias "fa0_xor1_tick" "fa0_xor1_output"
+alias "fa0_xor1_tickrecurse" "fa0_xor0_execute"
+alias "fa0_xor1_rcl" "alias fa0_xor1_execute ; fa0_xor1_tickrecurse; fa0_xor1_tick; alias fa0_xor1_execute fa0_xor1_rcl"
+alias "fa0_xor1_execute" "fa0_xor1_rcl"
+
+
+//============================================================
+// AND gate "fa0_and0"
+//============================================================
+
+alias "fa0_and0_in_0__0" "alias fa0_and0_output fa0_and0_out__0"
+alias "fa0_and0_in_0__1" "alias fa0_and0_output fa0_and0_stage1"
+
+alias "fa0_and0_stage1" "fa0_and0_out__0"
+
+alias "fa0_and0_in_1__0" "alias fa0_and0_stage1 fa0_and0_out__0"
+alias "fa0_and0_in_1__1" "alias fa0_and0_stage1 fa0_and0_out__1"
+
+alias "fa0_and0_output" ""
+
+alias "fa0_and0_out__0" "fa0_or_in_0__0"
+alias "fa0_and0_out__1" "fa0_or_in_0__1"
+
+alias "fa0_and0_tick" "fa0_and0_output"
+alias "fa0_and0_tickrecurse" "fa0_xor0_execute"
+alias "fa0_and0_rcl" "alias fa0_and0_execute ; fa0_and0_tickrecurse; fa0_and0_tick; alias fa0_and0_execute fa0_and0_rcl"
+alias "fa0_and0_execute" "fa0_and0_rcl"
+
+
+//============================================================
+// AND gate "fa0_and1"
+//============================================================
+
+alias "fa0_and1_in_0__0" "alias fa0_and1_output fa0_and1_out__0"
+alias "fa0_and1_in_0__1" "alias fa0_and1_output fa0_and1_stage1"
+
+alias "fa0_and1_stage1" "fa0_and1_out__0"
+
+alias "fa0_and1_in_1__0" "alias fa0_and1_stage1 fa0_and1_out__0"
+alias "fa0_and1_in_1__1" "alias fa0_and1_stage1 fa0_and1_out__1"
+
+alias "fa0_and1_output" ""
+
+alias "fa0_and1_out__0" "fa0_or_in_1__0"
+alias "fa0_and1_out__1" "fa0_or_in_1__1"
+
+alias "fa0_and1_tick" "fa0_and1_output"
+alias "fa0_and1_tickrecurse" ""
+alias "fa0_and1_rcl" "alias fa0_and1_execute ; fa0_and1_tickrecurse; fa0_and1_tick; alias fa0_and1_execute fa0_and1_rcl"
+alias "fa0_and1_execute" "fa0_and1_rcl"
+
+
+//============================================================
+// OR gate "fa0_or"
+//============================================================
+
+alias "fa0_or_in_0__0" "alias fa0_or_output fa0_or_stage1"
+alias "fa0_or_in_0__1" "alias fa0_or_output fa0_or_out__1"
+
+alias "fa0_or_stage1" "fa0_or_out__0"
+
+alias "fa0_or_in_1__0" "alias fa0_or_stage1 fa0_or_out__0"
+alias "fa0_or_in_1__1" "alias fa0_or_stage1 fa0_or_out__1"
+
+alias "fa0_or_output" ""
+
+alias "fa0_or_out__0" "fa1_xor1_in_1__0; fa1_and0_in_1__0"
+alias "fa0_or_out__1" "fa1_xor1_in_1__1; fa1_and0_in_1__1"
+
+alias "fa0_or_tick" "fa0_or_output"
+alias "fa0_or_tickrecurse" "fa0_and0_execute; fa0_and1_execute"
+alias "fa0_or_rcl" "alias fa0_or_execute ; fa0_or_tickrecurse; fa0_or_tick; alias fa0_or_execute fa0_or_rcl"
+alias "fa0_or_execute" "fa0_or_rcl"
+
+
+//*************************************************************************************
+// Full Adder for bit 1 (8 total)
+//*************************************************************************************
+
+
+alias "fa1_A__0" "fa1_xor0_in_0__0; fa1_and1_in_0__0"
+alias "fa1_A__1" "fa1_xor0_in_0__1; fa1_and1_in_0__1"
+alias "fa1_B__0" "fa1_xor0_in_1__0; fa1_and1_in_1__0"
+alias "fa1_B__1" "fa1_xor0_in_1__1; fa1_and1_in_1__1"
+//============================================================
+// XOR gate "fa1_xor0"
+//============================================================
+
+alias "fa1_xor0_in_0__0" "alias fa1_xor0_output fa1_xor0_stage1"
+alias "fa1_xor0_in_0__1" "alias fa1_xor0_output fa1_xor0_stage2"
+
+alias "fa1_xor0_stage1" "fa1_xor0_out__0"
+
+alias "fa1_xor0_stage2" "fa1_xor0_out__1"
+
+alias "fa1_xor0_in_1__0" "alias fa1_xor0_stage1 fa1_xor0_out__0; alias fa1_xor0_stage2 fa1_xor0_out__1"
+alias "fa1_xor0_in_1__1" "alias fa1_xor0_stage1 fa1_xor0_out__1; alias fa1_xor0_stage2 fa1_xor0_out__0"
+
+alias "fa1_xor0_output" ""
+
+alias "fa1_xor0_out__0" "fa1_xor1_in_0__0; fa1_and0_in_0__0"
+alias "fa1_xor0_out__1" "fa1_xor1_in_0__1; fa1_and0_in_0__1"
+
+alias "fa1_xor0_tick" "fa1_xor0_output"
+alias "fa1_xor0_tickrecurse" ""
+alias "fa1_xor0_rcl" "alias fa1_xor0_execute ; fa1_xor0_tickrecurse; fa1_xor0_tick; alias fa1_xor0_execute fa1_xor0_rcl"
+alias "fa1_xor0_execute" "fa1_xor0_rcl"
+
+
+//============================================================
+// XOR gate "fa1_xor1"
+//============================================================
+
+alias "fa1_xor1_in_0__0" "alias fa1_xor1_output fa1_xor1_stage1"
+alias "fa1_xor1_in_0__1" "alias fa1_xor1_output fa1_xor1_stage2"
+
+alias "fa1_xor1_stage1" "fa1_xor1_out__0"
+
+alias "fa1_xor1_stage2" "fa1_xor1_out__1"
+
+alias "fa1_xor1_in_1__0" "alias fa1_xor1_stage1 fa1_xor1_out__0; alias fa1_xor1_stage2 fa1_xor1_out__1"
+alias "fa1_xor1_in_1__1" "alias fa1_xor1_stage1 fa1_xor1_out__1; alias fa1_xor1_stage2 fa1_xor1_out__0"
+
+alias "fa1_xor1_output" ""
+
+alias "fa1_xor1_out__0" "echo S[1] = 0"
+alias "fa1_xor1_out__1" "echo S[1] = 1"
+
+alias "fa1_xor1_tick" "fa1_xor1_output"
+alias "fa1_xor1_tickrecurse" "fa1_xor0_execute; fa0_or_execute"
+alias "fa1_xor1_rcl" "alias fa1_xor1_execute ; fa1_xor1_tickrecurse; fa1_xor1_tick; alias fa1_xor1_execute fa1_xor1_rcl"
+alias "fa1_xor1_execute" "fa1_xor1_rcl"
+
+
+//============================================================
+// AND gate "fa1_and0"
+//============================================================
+
+alias "fa1_and0_in_0__0" "alias fa1_and0_output fa1_and0_out__0"
+alias "fa1_and0_in_0__1" "alias fa1_and0_output fa1_and0_stage1"
+
+alias "fa1_and0_stage1" "fa1_and0_out__0"
+
+alias "fa1_and0_in_1__0" "alias fa1_and0_stage1 fa1_and0_out__0"
+alias "fa1_and0_in_1__1" "alias fa1_and0_stage1 fa1_and0_out__1"
+
+alias "fa1_and0_output" ""
+
+alias "fa1_and0_out__0" "fa1_or_in_0__0"
+alias "fa1_and0_out__1" "fa1_or_in_0__1"
+
+alias "fa1_and0_tick" "fa1_and0_output"
+alias "fa1_and0_tickrecurse" "fa1_xor0_execute; fa0_or_execute"
+alias "fa1_and0_rcl" "alias fa1_and0_execute ; fa1_and0_tickrecurse; fa1_and0_tick; alias fa1_and0_execute fa1_and0_rcl"
+alias "fa1_and0_execute" "fa1_and0_rcl"
+
+
+//============================================================
+// AND gate "fa1_and1"
+//============================================================
+
+alias "fa1_and1_in_0__0" "alias fa1_and1_output fa1_and1_out__0"
+alias "fa1_and1_in_0__1" "alias fa1_and1_output fa1_and1_stage1"
+
+alias "fa1_and1_stage1" "fa1_and1_out__0"
+
+alias "fa1_and1_in_1__0" "alias fa1_and1_stage1 fa1_and1_out__0"
+alias "fa1_and1_in_1__1" "alias fa1_and1_stage1 fa1_and1_out__1"
+
+alias "fa1_and1_output" ""
+
+alias "fa1_and1_out__0" "fa1_or_in_1__0"
+alias "fa1_and1_out__1" "fa1_or_in_1__1"
+
+alias "fa1_and1_tick" "fa1_and1_output"
+alias "fa1_and1_tickrecurse" ""
+alias "fa1_and1_rcl" "alias fa1_and1_execute ; fa1_and1_tickrecurse; fa1_and1_tick; alias fa1_and1_execute fa1_and1_rcl"
+alias "fa1_and1_execute" "fa1_and1_rcl"
+
+
+//============================================================
+// OR gate "fa1_or"
+//============================================================
+
+alias "fa1_or_in_0__0" "alias fa1_or_output fa1_or_stage1"
+alias "fa1_or_in_0__1" "alias fa1_or_output fa1_or_out__1"
+
+alias "fa1_or_stage1" "fa1_or_out__0"
+
+alias "fa1_or_in_1__0" "alias fa1_or_stage1 fa1_or_out__0"
+alias "fa1_or_in_1__1" "alias fa1_or_stage1 fa1_or_out__1"
+
+alias "fa1_or_output" ""
+
+alias "fa1_or_out__0" "fa2_xor1_in_1__0; fa2_and0_in_1__0"
+alias "fa1_or_out__1" "fa2_xor1_in_1__1; fa2_and0_in_1__1"
+
+alias "fa1_or_tick" "fa1_or_output"
+alias "fa1_or_tickrecurse" "fa1_and0_execute; fa1_and1_execute"
+alias "fa1_or_rcl" "alias fa1_or_execute ; fa1_or_tickrecurse; fa1_or_tick; alias fa1_or_execute fa1_or_rcl"
+alias "fa1_or_execute" "fa1_or_rcl"
+
+
+//*************************************************************************************
+// Full Adder for bit 2 (8 total)
+//*************************************************************************************
+
+
+alias "fa2_A__0" "fa2_xor0_in_0__0; fa2_and1_in_0__0"
+alias "fa2_A__1" "fa2_xor0_in_0__1; fa2_and1_in_0__1"
+alias "fa2_B__0" "fa2_xor0_in_1__0; fa2_and1_in_1__0"
+alias "fa2_B__1" "fa2_xor0_in_1__1; fa2_and1_in_1__1"
+//============================================================
+// XOR gate "fa2_xor0"
+//============================================================
+
+alias "fa2_xor0_in_0__0" "alias fa2_xor0_output fa2_xor0_stage1"
+alias "fa2_xor0_in_0__1" "alias fa2_xor0_output fa2_xor0_stage2"
+
+alias "fa2_xor0_stage1" "fa2_xor0_out__0"
+
+alias "fa2_xor0_stage2" "fa2_xor0_out__1"
+
+alias "fa2_xor0_in_1__0" "alias fa2_xor0_stage1 fa2_xor0_out__0; alias fa2_xor0_stage2 fa2_xor0_out__1"
+alias "fa2_xor0_in_1__1" "alias fa2_xor0_stage1 fa2_xor0_out__1; alias fa2_xor0_stage2 fa2_xor0_out__0"
+
+alias "fa2_xor0_output" ""
+
+alias "fa2_xor0_out__0" "fa2_xor1_in_0__0; fa2_and0_in_0__0"
+alias "fa2_xor0_out__1" "fa2_xor1_in_0__1; fa2_and0_in_0__1"
+
+alias "fa2_xor0_tick" "fa2_xor0_output"
+alias "fa2_xor0_tickrecurse" ""
+alias "fa2_xor0_rcl" "alias fa2_xor0_execute ; fa2_xor0_tickrecurse; fa2_xor0_tick; alias fa2_xor0_execute fa2_xor0_rcl"
+alias "fa2_xor0_execute" "fa2_xor0_rcl"
+
+
+//============================================================
+// XOR gate "fa2_xor1"
+//============================================================
+
+alias "fa2_xor1_in_0__0" "alias fa2_xor1_output fa2_xor1_stage1"
+alias "fa2_xor1_in_0__1" "alias fa2_xor1_output fa2_xor1_stage2"
+
+alias "fa2_xor1_stage1" "fa2_xor1_out__0"
+
+alias "fa2_xor1_stage2" "fa2_xor1_out__1"
+
+alias "fa2_xor1_in_1__0" "alias fa2_xor1_stage1 fa2_xor1_out__0; alias fa2_xor1_stage2 fa2_xor1_out__1"
+alias "fa2_xor1_in_1__1" "alias fa2_xor1_stage1 fa2_xor1_out__1; alias fa2_xor1_stage2 fa2_xor1_out__0"
+
+alias "fa2_xor1_output" ""
+
+alias "fa2_xor1_out__0" "echo S[2] = 0"
+alias "fa2_xor1_out__1" "echo S[2] = 1"
+
+alias "fa2_xor1_tick" "fa2_xor1_output"
+alias "fa2_xor1_tickrecurse" "fa2_xor0_execute; fa1_or_execute"
+alias "fa2_xor1_rcl" "alias fa2_xor1_execute ; fa2_xor1_tickrecurse; fa2_xor1_tick; alias fa2_xor1_execute fa2_xor1_rcl"
+alias "fa2_xor1_execute" "fa2_xor1_rcl"
+
+
+//============================================================
+// AND gate "fa2_and0"
+//============================================================
+
+alias "fa2_and0_in_0__0" "alias fa2_and0_output fa2_and0_out__0"
+alias "fa2_and0_in_0__1" "alias fa2_and0_output fa2_and0_stage1"
+
+alias "fa2_and0_stage1" "fa2_and0_out__0"
+
+alias "fa2_and0_in_1__0" "alias fa2_and0_stage1 fa2_and0_out__0"
+alias "fa2_and0_in_1__1" "alias fa2_and0_stage1 fa2_and0_out__1"
+
+alias "fa2_and0_output" ""
+
+alias "fa2_and0_out__0" "fa2_or_in_0__0"
+alias "fa2_and0_out__1" "fa2_or_in_0__1"
+
+alias "fa2_and0_tick" "fa2_and0_output"
+alias "fa2_and0_tickrecurse" "fa2_xor0_execute; fa1_or_execute"
+alias "fa2_and0_rcl" "alias fa2_and0_execute ; fa2_and0_tickrecurse; fa2_and0_tick; alias fa2_and0_execute fa2_and0_rcl"
+alias "fa2_and0_execute" "fa2_and0_rcl"
+
+
+//============================================================
+// AND gate "fa2_and1"
+//============================================================
+
+alias "fa2_and1_in_0__0" "alias fa2_and1_output fa2_and1_out__0"
+alias "fa2_and1_in_0__1" "alias fa2_and1_output fa2_and1_stage1"
+
+alias "fa2_and1_stage1" "fa2_and1_out__0"
+
+alias "fa2_and1_in_1__0" "alias fa2_and1_stage1 fa2_and1_out__0"
+alias "fa2_and1_in_1__1" "alias fa2_and1_stage1 fa2_and1_out__1"
+
+alias "fa2_and1_output" ""
+
+alias "fa2_and1_out__0" "fa2_or_in_1__0"
+alias "fa2_and1_out__1" "fa2_or_in_1__1"
+
+alias "fa2_and1_tick" "fa2_and1_output"
+alias "fa2_and1_tickrecurse" ""
+alias "fa2_and1_rcl" "alias fa2_and1_execute ; fa2_and1_tickrecurse; fa2_and1_tick; alias fa2_and1_execute fa2_and1_rcl"
+alias "fa2_and1_execute" "fa2_and1_rcl"
+
+
+//============================================================
+// OR gate "fa2_or"
+//============================================================
+
+alias "fa2_or_in_0__0" "alias fa2_or_output fa2_or_stage1"
+alias "fa2_or_in_0__1" "alias fa2_or_output fa2_or_out__1"
+
+alias "fa2_or_stage1" "fa2_or_out__0"
+
+alias "fa2_or_in_1__0" "alias fa2_or_stage1 fa2_or_out__0"
+alias "fa2_or_in_1__1" "alias fa2_or_stage1 fa2_or_out__1"
+
+alias "fa2_or_output" ""
+
+alias "fa2_or_out__0" "fa3_xor1_in_1__0; fa3_and0_in_1__0"
+alias "fa2_or_out__1" "fa3_xor1_in_1__1; fa3_and0_in_1__1"
+
+alias "fa2_or_tick" "fa2_or_output"
+alias "fa2_or_tickrecurse" "fa2_and0_execute; fa2_and1_execute"
+alias "fa2_or_rcl" "alias fa2_or_execute ; fa2_or_tickrecurse; fa2_or_tick; alias fa2_or_execute fa2_or_rcl"
+alias "fa2_or_execute" "fa2_or_rcl"
+
+
+//*************************************************************************************
+// Full Adder for bit 3 (8 total)
+//*************************************************************************************
+
+
+alias "fa3_A__0" "fa3_xor0_in_0__0; fa3_and1_in_0__0"
+alias "fa3_A__1" "fa3_xor0_in_0__1; fa3_and1_in_0__1"
+alias "fa3_B__0" "fa3_xor0_in_1__0; fa3_and1_in_1__0"
+alias "fa3_B__1" "fa3_xor0_in_1__1; fa3_and1_in_1__1"
+//============================================================
+// XOR gate "fa3_xor0"
+//============================================================
+
+alias "fa3_xor0_in_0__0" "alias fa3_xor0_output fa3_xor0_stage1"
+alias "fa3_xor0_in_0__1" "alias fa3_xor0_output fa3_xor0_stage2"
+
+alias "fa3_xor0_stage1" "fa3_xor0_out__0"
+
+alias "fa3_xor0_stage2" "fa3_xor0_out__1"
+
+alias "fa3_xor0_in_1__0" "alias fa3_xor0_stage1 fa3_xor0_out__0; alias fa3_xor0_stage2 fa3_xor0_out__1"
+alias "fa3_xor0_in_1__1" "alias fa3_xor0_stage1 fa3_xor0_out__1; alias fa3_xor0_stage2 fa3_xor0_out__0"
+
+alias "fa3_xor0_output" ""
+
+alias "fa3_xor0_out__0" "fa3_xor1_in_0__0; fa3_and0_in_0__0"
+alias "fa3_xor0_out__1" "fa3_xor1_in_0__1; fa3_and0_in_0__1"
+
+alias "fa3_xor0_tick" "fa3_xor0_output"
+alias "fa3_xor0_tickrecurse" ""
+alias "fa3_xor0_rcl" "alias fa3_xor0_execute ; fa3_xor0_tickrecurse; fa3_xor0_tick; alias fa3_xor0_execute fa3_xor0_rcl"
+alias "fa3_xor0_execute" "fa3_xor0_rcl"
+
+
+//============================================================
+// XOR gate "fa3_xor1"
+//============================================================
+
+alias "fa3_xor1_in_0__0" "alias fa3_xor1_output fa3_xor1_stage1"
+alias "fa3_xor1_in_0__1" "alias fa3_xor1_output fa3_xor1_stage2"
+
+alias "fa3_xor1_stage1" "fa3_xor1_out__0"
+
+alias "fa3_xor1_stage2" "fa3_xor1_out__1"
+
+alias "fa3_xor1_in_1__0" "alias fa3_xor1_stage1 fa3_xor1_out__0; alias fa3_xor1_stage2 fa3_xor1_out__1"
+alias "fa3_xor1_in_1__1" "alias fa3_xor1_stage1 fa3_xor1_out__1; alias fa3_xor1_stage2 fa3_xor1_out__0"
+
+alias "fa3_xor1_output" ""
+
+alias "fa3_xor1_out__0" "echo S[3] = 0"
+alias "fa3_xor1_out__1" "echo S[3] = 1"
+
+alias "fa3_xor1_tick" "fa3_xor1_output"
+alias "fa3_xor1_tickrecurse" "fa3_xor0_execute; fa2_or_execute"
+alias "fa3_xor1_rcl" "alias fa3_xor1_execute ; fa3_xor1_tickrecurse; fa3_xor1_tick; alias fa3_xor1_execute fa3_xor1_rcl"
+alias "fa3_xor1_execute" "fa3_xor1_rcl"
+
+
+//============================================================
+// AND gate "fa3_and0"
+//============================================================
+
+alias "fa3_and0_in_0__0" "alias fa3_and0_output fa3_and0_out__0"
+alias "fa3_and0_in_0__1" "alias fa3_and0_output fa3_and0_stage1"
+
+alias "fa3_and0_stage1" "fa3_and0_out__0"
+
+alias "fa3_and0_in_1__0" "alias fa3_and0_stage1 fa3_and0_out__0"
+alias "fa3_and0_in_1__1" "alias fa3_and0_stage1 fa3_and0_out__1"
+
+alias "fa3_and0_output" ""
+
+alias "fa3_and0_out__0" "fa3_or_in_0__0"
+alias "fa3_and0_out__1" "fa3_or_in_0__1"
+
+alias "fa3_and0_tick" "fa3_and0_output"
+alias "fa3_and0_tickrecurse" "fa3_xor0_execute; fa2_or_execute"
+alias "fa3_and0_rcl" "alias fa3_and0_execute ; fa3_and0_tickrecurse; fa3_and0_tick; alias fa3_and0_execute fa3_and0_rcl"
+alias "fa3_and0_execute" "fa3_and0_rcl"
+
+
+//============================================================
+// AND gate "fa3_and1"
+//============================================================
+
+alias "fa3_and1_in_0__0" "alias fa3_and1_output fa3_and1_out__0"
+alias "fa3_and1_in_0__1" "alias fa3_and1_output fa3_and1_stage1"
+
+alias "fa3_and1_stage1" "fa3_and1_out__0"
+
+alias "fa3_and1_in_1__0" "alias fa3_and1_stage1 fa3_and1_out__0"
+alias "fa3_and1_in_1__1" "alias fa3_and1_stage1 fa3_and1_out__1"
+
+alias "fa3_and1_output" ""
+
+alias "fa3_and1_out__0" "fa3_or_in_1__0"
+alias "fa3_and1_out__1" "fa3_or_in_1__1"
+
+alias "fa3_and1_tick" "fa3_and1_output"
+alias "fa3_and1_tickrecurse" ""
+alias "fa3_and1_rcl" "alias fa3_and1_execute ; fa3_and1_tickrecurse; fa3_and1_tick; alias fa3_and1_execute fa3_and1_rcl"
+alias "fa3_and1_execute" "fa3_and1_rcl"
+
+
+//============================================================
+// OR gate "fa3_or"
+//============================================================
+
+alias "fa3_or_in_0__0" "alias fa3_or_output fa3_or_stage1"
+alias "fa3_or_in_0__1" "alias fa3_or_output fa3_or_out__1"
+
+alias "fa3_or_stage1" "fa3_or_out__0"
+
+alias "fa3_or_in_1__0" "alias fa3_or_stage1 fa3_or_out__0"
+alias "fa3_or_in_1__1" "alias fa3_or_stage1 fa3_or_out__1"
+
+alias "fa3_or_output" ""
+
+alias "fa3_or_out__0" "fa4_xor1_in_1__0; fa4_and0_in_1__0"
+alias "fa3_or_out__1" "fa4_xor1_in_1__1; fa4_and0_in_1__1"
+
+alias "fa3_or_tick" "fa3_or_output"
+alias "fa3_or_tickrecurse" "fa3_and0_execute; fa3_and1_execute"
+alias "fa3_or_rcl" "alias fa3_or_execute ; fa3_or_tickrecurse; fa3_or_tick; alias fa3_or_execute fa3_or_rcl"
+alias "fa3_or_execute" "fa3_or_rcl"
+
+
+//*************************************************************************************
+// Full Adder for bit 4 (8 total)
+//*************************************************************************************
+
+
+alias "fa4_A__0" "fa4_xor0_in_0__0; fa4_and1_in_0__0"
+alias "fa4_A__1" "fa4_xor0_in_0__1; fa4_and1_in_0__1"
+alias "fa4_B__0" "fa4_xor0_in_1__0; fa4_and1_in_1__0"
+alias "fa4_B__1" "fa4_xor0_in_1__1; fa4_and1_in_1__1"
+//============================================================
+// XOR gate "fa4_xor0"
+//============================================================
+
+alias "fa4_xor0_in_0__0" "alias fa4_xor0_output fa4_xor0_stage1"
+alias "fa4_xor0_in_0__1" "alias fa4_xor0_output fa4_xor0_stage2"
+
+alias "fa4_xor0_stage1" "fa4_xor0_out__0"
+
+alias "fa4_xor0_stage2" "fa4_xor0_out__1"
+
+alias "fa4_xor0_in_1__0" "alias fa4_xor0_stage1 fa4_xor0_out__0; alias fa4_xor0_stage2 fa4_xor0_out__1"
+alias "fa4_xor0_in_1__1" "alias fa4_xor0_stage1 fa4_xor0_out__1; alias fa4_xor0_stage2 fa4_xor0_out__0"
+
+alias "fa4_xor0_output" ""
+
+alias "fa4_xor0_out__0" "fa4_xor1_in_0__0; fa4_and0_in_0__0"
+alias "fa4_xor0_out__1" "fa4_xor1_in_0__1; fa4_and0_in_0__1"
+
+alias "fa4_xor0_tick" "fa4_xor0_output"
+alias "fa4_xor0_tickrecurse" ""
+alias "fa4_xor0_rcl" "alias fa4_xor0_execute ; fa4_xor0_tickrecurse; fa4_xor0_tick; alias fa4_xor0_execute fa4_xor0_rcl"
+alias "fa4_xor0_execute" "fa4_xor0_rcl"
+
+
+//============================================================
+// XOR gate "fa4_xor1"
+//============================================================
+
+alias "fa4_xor1_in_0__0" "alias fa4_xor1_output fa4_xor1_stage1"
+alias "fa4_xor1_in_0__1" "alias fa4_xor1_output fa4_xor1_stage2"
+
+alias "fa4_xor1_stage1" "fa4_xor1_out__0"
+
+alias "fa4_xor1_stage2" "fa4_xor1_out__1"
+
+alias "fa4_xor1_in_1__0" "alias fa4_xor1_stage1 fa4_xor1_out__0; alias fa4_xor1_stage2 fa4_xor1_out__1"
+alias "fa4_xor1_in_1__1" "alias fa4_xor1_stage1 fa4_xor1_out__1; alias fa4_xor1_stage2 fa4_xor1_out__0"
+
+alias "fa4_xor1_output" ""
+
+alias "fa4_xor1_out__0" "echo S[4] = 0"
+alias "fa4_xor1_out__1" "echo S[4] = 1"
+
+alias "fa4_xor1_tick" "fa4_xor1_output"
+alias "fa4_xor1_tickrecurse" "fa4_xor0_execute; fa3_or_execute"
+alias "fa4_xor1_rcl" "alias fa4_xor1_execute ; fa4_xor1_tickrecurse; fa4_xor1_tick; alias fa4_xor1_execute fa4_xor1_rcl"
+alias "fa4_xor1_execute" "fa4_xor1_rcl"
+
+
+//============================================================
+// AND gate "fa4_and0"
+//============================================================
+
+alias "fa4_and0_in_0__0" "alias fa4_and0_output fa4_and0_out__0"
+alias "fa4_and0_in_0__1" "alias fa4_and0_output fa4_and0_stage1"
+
+alias "fa4_and0_stage1" "fa4_and0_out__0"
+
+alias "fa4_and0_in_1__0" "alias fa4_and0_stage1 fa4_and0_out__0"
+alias "fa4_and0_in_1__1" "alias fa4_and0_stage1 fa4_and0_out__1"
+
+alias "fa4_and0_output" ""
+
+alias "fa4_and0_out__0" "fa4_or_in_0__0"
+alias "fa4_and0_out__1" "fa4_or_in_0__1"
+
+alias "fa4_and0_tick" "fa4_and0_output"
+alias "fa4_and0_tickrecurse" "fa4_xor0_execute; fa3_or_execute"
+alias "fa4_and0_rcl" "alias fa4_and0_execute ; fa4_and0_tickrecurse; fa4_and0_tick; alias fa4_and0_execute fa4_and0_rcl"
+alias "fa4_and0_execute" "fa4_and0_rcl"
+
+
+//============================================================
+// AND gate "fa4_and1"
+//============================================================
+
+alias "fa4_and1_in_0__0" "alias fa4_and1_output fa4_and1_out__0"
+alias "fa4_and1_in_0__1" "alias fa4_and1_output fa4_and1_stage1"
+
+alias "fa4_and1_stage1" "fa4_and1_out__0"
+
+alias "fa4_and1_in_1__0" "alias fa4_and1_stage1 fa4_and1_out__0"
+alias "fa4_and1_in_1__1" "alias fa4_and1_stage1 fa4_and1_out__1"
+
+alias "fa4_and1_output" ""
+
+alias "fa4_and1_out__0" "fa4_or_in_1__0"
+alias "fa4_and1_out__1" "fa4_or_in_1__1"
+
+alias "fa4_and1_tick" "fa4_and1_output"
+alias "fa4_and1_tickrecurse" ""
+alias "fa4_and1_rcl" "alias fa4_and1_execute ; fa4_and1_tickrecurse; fa4_and1_tick; alias fa4_and1_execute fa4_and1_rcl"
+alias "fa4_and1_execute" "fa4_and1_rcl"
+
+
+//============================================================
+// OR gate "fa4_or"
+//============================================================
+
+alias "fa4_or_in_0__0" "alias fa4_or_output fa4_or_stage1"
+alias "fa4_or_in_0__1" "alias fa4_or_output fa4_or_out__1"
+
+alias "fa4_or_stage1" "fa4_or_out__0"
+
+alias "fa4_or_in_1__0" "alias fa4_or_stage1 fa4_or_out__0"
+alias "fa4_or_in_1__1" "alias fa4_or_stage1 fa4_or_out__1"
+
+alias "fa4_or_output" ""
+
+alias "fa4_or_out__0" "fa5_xor1_in_1__0; fa5_and0_in_1__0"
+alias "fa4_or_out__1" "fa5_xor1_in_1__1; fa5_and0_in_1__1"
+
+alias "fa4_or_tick" "fa4_or_output"
+alias "fa4_or_tickrecurse" "fa4_and0_execute; fa4_and1_execute"
+alias "fa4_or_rcl" "alias fa4_or_execute ; fa4_or_tickrecurse; fa4_or_tick; alias fa4_or_execute fa4_or_rcl"
+alias "fa4_or_execute" "fa4_or_rcl"
+
+
+//*************************************************************************************
+// Full Adder for bit 5 (8 total)
+//*************************************************************************************
+
+
+alias "fa5_A__0" "fa5_xor0_in_0__0; fa5_and1_in_0__0"
+alias "fa5_A__1" "fa5_xor0_in_0__1; fa5_and1_in_0__1"
+alias "fa5_B__0" "fa5_xor0_in_1__0; fa5_and1_in_1__0"
+alias "fa5_B__1" "fa5_xor0_in_1__1; fa5_and1_in_1__1"
+//============================================================
+// XOR gate "fa5_xor0"
+//============================================================
+
+alias "fa5_xor0_in_0__0" "alias fa5_xor0_output fa5_xor0_stage1"
+alias "fa5_xor0_in_0__1" "alias fa5_xor0_output fa5_xor0_stage2"
+
+alias "fa5_xor0_stage1" "fa5_xor0_out__0"
+
+alias "fa5_xor0_stage2" "fa5_xor0_out__1"
+
+alias "fa5_xor0_in_1__0" "alias fa5_xor0_stage1 fa5_xor0_out__0; alias fa5_xor0_stage2 fa5_xor0_out__1"
+alias "fa5_xor0_in_1__1" "alias fa5_xor0_stage1 fa5_xor0_out__1; alias fa5_xor0_stage2 fa5_xor0_out__0"
+
+alias "fa5_xor0_output" ""
+
+alias "fa5_xor0_out__0" "fa5_xor1_in_0__0; fa5_and0_in_0__0"
+alias "fa5_xor0_out__1" "fa5_xor1_in_0__1; fa5_and0_in_0__1"
+
+alias "fa5_xor0_tick" "fa5_xor0_output"
+alias "fa5_xor0_tickrecurse" ""
+alias "fa5_xor0_rcl" "alias fa5_xor0_execute ; fa5_xor0_tickrecurse; fa5_xor0_tick; alias fa5_xor0_execute fa5_xor0_rcl"
+alias "fa5_xor0_execute" "fa5_xor0_rcl"
+
+
+//============================================================
+// XOR gate "fa5_xor1"
+//============================================================
+
+alias "fa5_xor1_in_0__0" "alias fa5_xor1_output fa5_xor1_stage1"
+alias "fa5_xor1_in_0__1" "alias fa5_xor1_output fa5_xor1_stage2"
+
+alias "fa5_xor1_stage1" "fa5_xor1_out__0"
+
+alias "fa5_xor1_stage2" "fa5_xor1_out__1"
+
+alias "fa5_xor1_in_1__0" "alias fa5_xor1_stage1 fa5_xor1_out__0; alias fa5_xor1_stage2 fa5_xor1_out__1"
+alias "fa5_xor1_in_1__1" "alias fa5_xor1_stage1 fa5_xor1_out__1; alias fa5_xor1_stage2 fa5_xor1_out__0"
+
+alias "fa5_xor1_output" ""
+
+alias "fa5_xor1_out__0" "echo S[5] = 0"
+alias "fa5_xor1_out__1" "echo S[5] = 1"
+
+alias "fa5_xor1_tick" "fa5_xor1_output"
+alias "fa5_xor1_tickrecurse" "fa5_xor0_execute; fa4_or_execute"
+alias "fa5_xor1_rcl" "alias fa5_xor1_execute ; fa5_xor1_tickrecurse; fa5_xor1_tick; alias fa5_xor1_execute fa5_xor1_rcl"
+alias "fa5_xor1_execute" "fa5_xor1_rcl"
+
+
+//============================================================
+// AND gate "fa5_and0"
+//============================================================
+
+alias "fa5_and0_in_0__0" "alias fa5_and0_output fa5_and0_out__0"
+alias "fa5_and0_in_0__1" "alias fa5_and0_output fa5_and0_stage1"
+
+alias "fa5_and0_stage1" "fa5_and0_out__0"
+
+alias "fa5_and0_in_1__0" "alias fa5_and0_stage1 fa5_and0_out__0"
+alias "fa5_and0_in_1__1" "alias fa5_and0_stage1 fa5_and0_out__1"
+
+alias "fa5_and0_output" ""
+
+alias "fa5_and0_out__0" "fa5_or_in_0__0"
+alias "fa5_and0_out__1" "fa5_or_in_0__1"
+
+alias "fa5_and0_tick" "fa5_and0_output"
+alias "fa5_and0_tickrecurse" "fa5_xor0_execute; fa4_or_execute"
+alias "fa5_and0_rcl" "alias fa5_and0_execute ; fa5_and0_tickrecurse; fa5_and0_tick; alias fa5_and0_execute fa5_and0_rcl"
+alias "fa5_and0_execute" "fa5_and0_rcl"
+
+
+//============================================================
+// AND gate "fa5_and1"
+//============================================================
+
+alias "fa5_and1_in_0__0" "alias fa5_and1_output fa5_and1_out__0"
+alias "fa5_and1_in_0__1" "alias fa5_and1_output fa5_and1_stage1"
+
+alias "fa5_and1_stage1" "fa5_and1_out__0"
+
+alias "fa5_and1_in_1__0" "alias fa5_and1_stage1 fa5_and1_out__0"
+alias "fa5_and1_in_1__1" "alias fa5_and1_stage1 fa5_and1_out__1"
+
+alias "fa5_and1_output" ""
+
+alias "fa5_and1_out__0" "fa5_or_in_1__0"
+alias "fa5_and1_out__1" "fa5_or_in_1__1"
+
+alias "fa5_and1_tick" "fa5_and1_output"
+alias "fa5_and1_tickrecurse" ""
+alias "fa5_and1_rcl" "alias fa5_and1_execute ; fa5_and1_tickrecurse; fa5_and1_tick; alias fa5_and1_execute fa5_and1_rcl"
+alias "fa5_and1_execute" "fa5_and1_rcl"
+
+
+//============================================================
+// OR gate "fa5_or"
+//============================================================
+
+alias "fa5_or_in_0__0" "alias fa5_or_output fa5_or_stage1"
+alias "fa5_or_in_0__1" "alias fa5_or_output fa5_or_out__1"
+
+alias "fa5_or_stage1" "fa5_or_out__0"
+
+alias "fa5_or_in_1__0" "alias fa5_or_stage1 fa5_or_out__0"
+alias "fa5_or_in_1__1" "alias fa5_or_stage1 fa5_or_out__1"
+
+alias "fa5_or_output" ""
+
+alias "fa5_or_out__0" "fa6_xor1_in_1__0; fa6_and0_in_1__0"
+alias "fa5_or_out__1" "fa6_xor1_in_1__1; fa6_and0_in_1__1"
+
+alias "fa5_or_tick" "fa5_or_output"
+alias "fa5_or_tickrecurse" "fa5_and0_execute; fa5_and1_execute"
+alias "fa5_or_rcl" "alias fa5_or_execute ; fa5_or_tickrecurse; fa5_or_tick; alias fa5_or_execute fa5_or_rcl"
+alias "fa5_or_execute" "fa5_or_rcl"
+
+
+//*************************************************************************************
+// Full Adder for bit 6 (8 total)
+//*************************************************************************************
+
+
+alias "fa6_A__0" "fa6_xor0_in_0__0; fa6_and1_in_0__0"
+alias "fa6_A__1" "fa6_xor0_in_0__1; fa6_and1_in_0__1"
+alias "fa6_B__0" "fa6_xor0_in_1__0; fa6_and1_in_1__0"
+alias "fa6_B__1" "fa6_xor0_in_1__1; fa6_and1_in_1__1"
+//============================================================
+// XOR gate "fa6_xor0"
+//============================================================
+
+alias "fa6_xor0_in_0__0" "alias fa6_xor0_output fa6_xor0_stage1"
+alias "fa6_xor0_in_0__1" "alias fa6_xor0_output fa6_xor0_stage2"
+
+alias "fa6_xor0_stage1" "fa6_xor0_out__0"
+
+alias "fa6_xor0_stage2" "fa6_xor0_out__1"
+
+alias "fa6_xor0_in_1__0" "alias fa6_xor0_stage1 fa6_xor0_out__0; alias fa6_xor0_stage2 fa6_xor0_out__1"
+alias "fa6_xor0_in_1__1" "alias fa6_xor0_stage1 fa6_xor0_out__1; alias fa6_xor0_stage2 fa6_xor0_out__0"
+
+alias "fa6_xor0_output" ""
+
+alias "fa6_xor0_out__0" "fa6_xor1_in_0__0; fa6_and0_in_0__0"
+alias "fa6_xor0_out__1" "fa6_xor1_in_0__1; fa6_and0_in_0__1"
+
+alias "fa6_xor0_tick" "fa6_xor0_output"
+alias "fa6_xor0_tickrecurse" ""
+alias "fa6_xor0_rcl" "alias fa6_xor0_execute ; fa6_xor0_tickrecurse; fa6_xor0_tick; alias fa6_xor0_execute fa6_xor0_rcl"
+alias "fa6_xor0_execute" "fa6_xor0_rcl"
+
+
+//============================================================
+// XOR gate "fa6_xor1"
+//============================================================
+
+alias "fa6_xor1_in_0__0" "alias fa6_xor1_output fa6_xor1_stage1"
+alias "fa6_xor1_in_0__1" "alias fa6_xor1_output fa6_xor1_stage2"
+
+alias "fa6_xor1_stage1" "fa6_xor1_out__0"
+
+alias "fa6_xor1_stage2" "fa6_xor1_out__1"
+
+alias "fa6_xor1_in_1__0" "alias fa6_xor1_stage1 fa6_xor1_out__0; alias fa6_xor1_stage2 fa6_xor1_out__1"
+alias "fa6_xor1_in_1__1" "alias fa6_xor1_stage1 fa6_xor1_out__1; alias fa6_xor1_stage2 fa6_xor1_out__0"
+
+alias "fa6_xor1_output" ""
+
+alias "fa6_xor1_out__0" "echo S[6] = 0"
+alias "fa6_xor1_out__1" "echo S[6] = 1"
+
+alias "fa6_xor1_tick" "fa6_xor1_output"
+alias "fa6_xor1_tickrecurse" "fa6_xor0_execute; fa5_or_execute"
+alias "fa6_xor1_rcl" "alias fa6_xor1_execute ; fa6_xor1_tickrecurse; fa6_xor1_tick; alias fa6_xor1_execute fa6_xor1_rcl"
+alias "fa6_xor1_execute" "fa6_xor1_rcl"
+
+
+//============================================================
+// AND gate "fa6_and0"
+//============================================================
+
+alias "fa6_and0_in_0__0" "alias fa6_and0_output fa6_and0_out__0"
+alias "fa6_and0_in_0__1" "alias fa6_and0_output fa6_and0_stage1"
+
+alias "fa6_and0_stage1" "fa6_and0_out__0"
+
+alias "fa6_and0_in_1__0" "alias fa6_and0_stage1 fa6_and0_out__0"
+alias "fa6_and0_in_1__1" "alias fa6_and0_stage1 fa6_and0_out__1"
+
+alias "fa6_and0_output" ""
+
+alias "fa6_and0_out__0" "fa6_or_in_0__0"
+alias "fa6_and0_out__1" "fa6_or_in_0__1"
+
+alias "fa6_and0_tick" "fa6_and0_output"
+alias "fa6_and0_tickrecurse" "fa6_xor0_execute; fa5_or_execute"
+alias "fa6_and0_rcl" "alias fa6_and0_execute ; fa6_and0_tickrecurse; fa6_and0_tick; alias fa6_and0_execute fa6_and0_rcl"
+alias "fa6_and0_execute" "fa6_and0_rcl"
+
+
+//============================================================
+// AND gate "fa6_and1"
+//============================================================
+
+alias "fa6_and1_in_0__0" "alias fa6_and1_output fa6_and1_out__0"
+alias "fa6_and1_in_0__1" "alias fa6_and1_output fa6_and1_stage1"
+
+alias "fa6_and1_stage1" "fa6_and1_out__0"
+
+alias "fa6_and1_in_1__0" "alias fa6_and1_stage1 fa6_and1_out__0"
+alias "fa6_and1_in_1__1" "alias fa6_and1_stage1 fa6_and1_out__1"
+
+alias "fa6_and1_output" ""
+
+alias "fa6_and1_out__0" "fa6_or_in_1__0"
+alias "fa6_and1_out__1" "fa6_or_in_1__1"
+
+alias "fa6_and1_tick" "fa6_and1_output"
+alias "fa6_and1_tickrecurse" ""
+alias "fa6_and1_rcl" "alias fa6_and1_execute ; fa6_and1_tickrecurse; fa6_and1_tick; alias fa6_and1_execute fa6_and1_rcl"
+alias "fa6_and1_execute" "fa6_and1_rcl"
+
+
+//============================================================
+// OR gate "fa6_or"
+//============================================================
+
+alias "fa6_or_in_0__0" "alias fa6_or_output fa6_or_stage1"
+alias "fa6_or_in_0__1" "alias fa6_or_output fa6_or_out__1"
+
+alias "fa6_or_stage1" "fa6_or_out__0"
+
+alias "fa6_or_in_1__0" "alias fa6_or_stage1 fa6_or_out__0"
+alias "fa6_or_in_1__1" "alias fa6_or_stage1 fa6_or_out__1"
+
+alias "fa6_or_output" ""
+
+alias "fa6_or_out__0" "fa7_xor1_in_1__0; fa7_and0_in_1__0"
+alias "fa6_or_out__1" "fa7_xor1_in_1__1; fa7_and0_in_1__1"
+
+alias "fa6_or_tick" "fa6_or_output"
+alias "fa6_or_tickrecurse" "fa6_and0_execute; fa6_and1_execute"
+alias "fa6_or_rcl" "alias fa6_or_execute ; fa6_or_tickrecurse; fa6_or_tick; alias fa6_or_execute fa6_or_rcl"
+alias "fa6_or_execute" "fa6_or_rcl"
+
+
+//*************************************************************************************
+// Full Adder for bit 7 (8 total)
+//*************************************************************************************
+
+
+alias "fa7_A__0" "fa7_xor0_in_0__0; fa7_and1_in_0__0"
+alias "fa7_A__1" "fa7_xor0_in_0__1; fa7_and1_in_0__1"
+alias "fa7_B__0" "fa7_xor0_in_1__0; fa7_and1_in_1__0"
+alias "fa7_B__1" "fa7_xor0_in_1__1; fa7_and1_in_1__1"
+//============================================================
+// XOR gate "fa7_xor0"
+//============================================================
+
+alias "fa7_xor0_in_0__0" "alias fa7_xor0_output fa7_xor0_stage1"
+alias "fa7_xor0_in_0__1" "alias fa7_xor0_output fa7_xor0_stage2"
+
+alias "fa7_xor0_stage1" "fa7_xor0_out__0"
+
+alias "fa7_xor0_stage2" "fa7_xor0_out__1"
+
+alias "fa7_xor0_in_1__0" "alias fa7_xor0_stage1 fa7_xor0_out__0; alias fa7_xor0_stage2 fa7_xor0_out__1"
+alias "fa7_xor0_in_1__1" "alias fa7_xor0_stage1 fa7_xor0_out__1; alias fa7_xor0_stage2 fa7_xor0_out__0"
+
+alias "fa7_xor0_output" ""
+
+alias "fa7_xor0_out__0" "fa7_xor1_in_0__0; fa7_and0_in_0__0"
+alias "fa7_xor0_out__1" "fa7_xor1_in_0__1; fa7_and0_in_0__1"
+
+alias "fa7_xor0_tick" "fa7_xor0_output"
+alias "fa7_xor0_tickrecurse" ""
+alias "fa7_xor0_rcl" "alias fa7_xor0_execute ; fa7_xor0_tickrecurse; fa7_xor0_tick; alias fa7_xor0_execute fa7_xor0_rcl"
+alias "fa7_xor0_execute" "fa7_xor0_rcl"
+
+
+//============================================================
+// XOR gate "fa7_xor1"
+//============================================================
+
+alias "fa7_xor1_in_0__0" "alias fa7_xor1_output fa7_xor1_stage1"
+alias "fa7_xor1_in_0__1" "alias fa7_xor1_output fa7_xor1_stage2"
+
+alias "fa7_xor1_stage1" "fa7_xor1_out__0"
+
+alias "fa7_xor1_stage2" "fa7_xor1_out__1"
+
+alias "fa7_xor1_in_1__0" "alias fa7_xor1_stage1 fa7_xor1_out__0; alias fa7_xor1_stage2 fa7_xor1_out__1"
+alias "fa7_xor1_in_1__1" "alias fa7_xor1_stage1 fa7_xor1_out__1; alias fa7_xor1_stage2 fa7_xor1_out__0"
+
+alias "fa7_xor1_output" ""
+
+alias "fa7_xor1_out__0" "echo S[7] = 0"
+alias "fa7_xor1_out__1" "echo S[7] = 1"
+
+alias "fa7_xor1_tick" "fa7_xor1_output"
+alias "fa7_xor1_tickrecurse" "fa7_xor0_execute; fa6_or_execute"
+alias "fa7_xor1_rcl" "alias fa7_xor1_execute ; fa7_xor1_tickrecurse; fa7_xor1_tick; alias fa7_xor1_execute fa7_xor1_rcl"
+alias "fa7_xor1_execute" "fa7_xor1_rcl"
+
+
+//============================================================
+// AND gate "fa7_and0"
+//============================================================
+
+alias "fa7_and0_in_0__0" "alias fa7_and0_output fa7_and0_out__0"
+alias "fa7_and0_in_0__1" "alias fa7_and0_output fa7_and0_stage1"
+
+alias "fa7_and0_stage1" "fa7_and0_out__0"
+
+alias "fa7_and0_in_1__0" "alias fa7_and0_stage1 fa7_and0_out__0"
+alias "fa7_and0_in_1__1" "alias fa7_and0_stage1 fa7_and0_out__1"
+
+alias "fa7_and0_output" ""
+
+alias "fa7_and0_out__0" "fa7_or_in_0__0"
+alias "fa7_and0_out__1" "fa7_or_in_0__1"
+
+alias "fa7_and0_tick" "fa7_and0_output"
+alias "fa7_and0_tickrecurse" "fa7_xor0_execute; fa6_or_execute"
+alias "fa7_and0_rcl" "alias fa7_and0_execute ; fa7_and0_tickrecurse; fa7_and0_tick; alias fa7_and0_execute fa7_and0_rcl"
+alias "fa7_and0_execute" "fa7_and0_rcl"
+
+
+//============================================================
+// AND gate "fa7_and1"
+//============================================================
+
+alias "fa7_and1_in_0__0" "alias fa7_and1_output fa7_and1_out__0"
+alias "fa7_and1_in_0__1" "alias fa7_and1_output fa7_and1_stage1"
+
+alias "fa7_and1_stage1" "fa7_and1_out__0"
+
+alias "fa7_and1_in_1__0" "alias fa7_and1_stage1 fa7_and1_out__0"
+alias "fa7_and1_in_1__1" "alias fa7_and1_stage1 fa7_and1_out__1"
+
+alias "fa7_and1_output" ""
+
+alias "fa7_and1_out__0" "fa7_or_in_1__0"
+alias "fa7_and1_out__1" "fa7_or_in_1__1"
+
+alias "fa7_and1_tick" "fa7_and1_output"
+alias "fa7_and1_tickrecurse" ""
+alias "fa7_and1_rcl" "alias fa7_and1_execute ; fa7_and1_tickrecurse; fa7_and1_tick; alias fa7_and1_execute fa7_and1_rcl"
+alias "fa7_and1_execute" "fa7_and1_rcl"
+
+
+//============================================================
+// OR gate "fa7_or"
+//============================================================
+
+alias "fa7_or_in_0__0" "alias fa7_or_output fa7_or_stage1"
+alias "fa7_or_in_0__1" "alias fa7_or_output fa7_or_out__1"
+
+alias "fa7_or_stage1" "fa7_or_out__0"
+
+alias "fa7_or_in_1__0" "alias fa7_or_stage1 fa7_or_out__0"
+alias "fa7_or_in_1__1" "alias fa7_or_stage1 fa7_or_out__1"
+
+alias "fa7_or_output" ""
+
+alias "fa7_or_out__0" "echo Carry = 0"
+alias "fa7_or_out__1" "echo Carry = 1"
+
+alias "fa7_or_tick" "fa7_or_output"
+alias "fa7_or_tickrecurse" "fa7_and0_execute; fa7_and1_execute"
+alias "fa7_or_rcl" "alias fa7_or_execute ; fa7_or_tickrecurse; fa7_or_tick; alias fa7_or_execute fa7_or_rcl"
+alias "fa7_or_execute" "fa7_or_rcl"
+
+
+
+
+alias "calc" "fa0_xor1_execute; fa1_xor1_execute; fa2_xor1_execute; fa3_xor1_execute; fa4_xor1_execute; fa5_xor1_execute; fa6_xor1_execute; fa7_xor1_execute"
+alias "getcarry" "fa7_or_execute"
+
+fa0_A__0
+fa1_A__1
+fa2_A__0
+fa3_A__1
+fa4_A__1
+fa5_A__0
+fa6_A__1
+fa7_A__1
+
+fa0_B__1
+fa1_B__0
+fa2_B__1
+fa3_B__1
+fa4_B__0
+fa5_B__0
+fa6_B__0
+fa7_B__1
+
+calc
+getcarry
